@@ -15,7 +15,11 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab4a85f8-0f71-4ff9-ae02-16a3593884c3" name="Default" comment="" />
+    <list default="true" id="ab4a85f8-0f71-4ff9-ae02-16a3593884c3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AussieFishTracker.ipr" afterPath="$PROJECT_DIR$/AussieFishTracker.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AussieFishTracker.iws" afterPath="$PROJECT_DIR$/AussieFishTracker.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/aft/LineGraph.java" afterPath="$PROJECT_DIR$/src/com/aft/LineGraph.java" />
+    </list>
     <ignored path="AussieFishTracker.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -101,21 +105,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="LineGraph.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="LineGraph.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/aft/LineGraph.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="54" column="56" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state line="54" column="54" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.29018492">
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="main.xml" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="40" selection-start="476" selection-end="476" vertical-scroll-proportion="0.3030303">
+                <state line="6" column="34" selection-start="329" selection-end="349" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -134,19 +136,19 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="54" selection-start="349" selection-end="349" vertical-scroll-proportion="0.17555939">
+                <state line="6" column="54" selection-start="349" selection-end="349" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="colors.xml" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="colors.xml" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+                <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.023743017">
                   <folding />
                 </state>
               </provider>
@@ -161,6 +163,9 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -169,10 +174,10 @@
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/project.properties" />
-        <option value="$PROJECT_DIR$/src/com/aft/LineGraph.java" />
         <option value="$PROJECT_DIR$/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/src/com/aft/MainActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/src/com/aft/LineGraph.java" />
       </list>
     </option>
   </component>
@@ -182,7 +187,7 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -218,16 +223,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="AussieFishTracker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -342,6 +337,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -350,7 +355,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
@@ -359,8 +364,8 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="HTC_One_XL" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -579,7 +584,7 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22061966" sideWeight="0.69084823" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22061966" sideWeight="0.69084823" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -592,8 +597,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32882884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16880342" sideWeight="0.69084823" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3091518" sideWeight="0.99690974" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16880342" sideWeight="0.8270089" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17299107" sideWeight="0.99690974" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -691,6 +696,21 @@
         <state line="5" column="13" selection-start="160" selection-end="160" vertical-scroll-proportion="0.12230216" />
       </provider>
     </entry>
+    <entry file="jar://C:/Android/platforms/android-16/android.jar!/android/R.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="888" column="28" selection-start="54484" selection-end="54484" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://C:/Android/sources/android-16/android/content/res/XmlResourceParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="17" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.3554007" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/com/aft/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="45" selection-start="861" selection-end="861" vertical-scroll-proportion="0.46993318" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/project.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="17" selection-start="560" selection-end="562" vertical-scroll-proportion="0.0" />
@@ -701,58 +721,33 @@
         <state line="6" column="63" selection-start="341" selection-end="341" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/aft/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="71" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="37" selection-start="275" selection-end="275" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="jar://C:/Android/platforms/android-16/android.jar!/android/R.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="888" column="28" selection-start="54484" selection-end="54484" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Android/sources/android-16/android/content/res/XmlResourceParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.3554007">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/com/aft/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="45" selection-start="861" selection-end="861" vertical-scroll-proportion="0.46993318">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/aft/LineGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="56" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/aft/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="71" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+        <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.023743017">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="40" selection-start="476" selection-end="476" vertical-scroll-proportion="0.3030303">
+        <state line="6" column="34" selection-start="329" selection-end="349" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/aft/LineGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="54" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.29018492">
           <folding />
         </state>
       </provider>
