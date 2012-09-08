@@ -6,11 +6,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.view.View;
 import android.widget.LinearLayout;
 import com.aft.R.array;
 import com.aft.R.id;
-import com.aft.R.menu;
 import org.achartengine.GraphicalView;
 
 public class MainActivity
@@ -24,11 +22,7 @@ public class MainActivity
   {
     super.onCreate( savedInstanceState );
     setContentView( R.layout.main );
-    //final Resources resources = this.getResources();
-    //final String[] locations = resources.getStringArray( array.locations );
-    final GraphicalView graph = new LineGraph().getView( this );
-    final LinearLayout layout = (LinearLayout) findViewById( id.chart );
-    layout.addView( graph );
+    refreshGraph("Warneet");
   }
 
   @Override
@@ -54,5 +48,19 @@ public class MainActivity
     return super.onPrepareOptionsMenu( menu );
   }
 
+  @Override
+  public boolean onOptionsItemSelected( MenuItem item )
+  {
+    // todo change the graph
+    return true;
+  }
 
+  private void refreshGraph( final String location )
+  {
+    // todo get currently selected location and render it
+    final GraphicalView graph = new LineGraph(this, location).getView();
+    final LinearLayout layout = (LinearLayout) findViewById( id.chart );
+    layout.removeAllViews();
+    layout.addView( graph );
+  }
 }

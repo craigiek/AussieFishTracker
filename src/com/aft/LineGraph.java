@@ -18,11 +18,16 @@ public class LineGraph
 {
   private final static int TIME_POINTS = 48;
   private Context _context;
+  private String _location;
 
-  public GraphicalView getView( final Context context )
+  public LineGraph( final Context context, final String location )
   {
     _context = context;
+    _location = location;
+  }
 
+  public GraphicalView getView()
+  {
     final XYMultipleSeriesRenderer chartRenderer = new XYMultipleSeriesRenderer();
     chartRenderer.setPanEnabled( false, false );
     chartRenderer.setAxisTitleTextSize( 20.0f );
@@ -49,7 +54,7 @@ public class LineGraph
     chartRenderer.setAxisTitleTextSize( 30.0f );
     chartRenderer.setChartTitleTextSize( 30.0f );
     final int[] margins = chartRenderer.getMargins();
-    chartRenderer.setMargins( new int[]{margins[0],margins[1],margins[2]+20,margins[3]} );
+    chartRenderer.setMargins( new int[]{margins[0],margins[1]+10,margins[2]+20,margins[3]} );
     //chartRenderer.setPanLimits( ???? );
 
     final XYMultipleSeriesDataset seriesList = new XYMultipleSeriesDataset();
@@ -60,7 +65,7 @@ public class LineGraph
 
     //final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
     final String format = _context.getResources().getString( R.string.chart_time_format );
-    final GraphicalView lineChartView = ChartFactory.getTimeChartView( context, seriesList, chartRenderer, format );
+    final GraphicalView lineChartView = ChartFactory.getTimeChartView( _context, seriesList, chartRenderer, format );
     return lineChartView;
   }
 
