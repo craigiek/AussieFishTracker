@@ -57,7 +57,6 @@ public class LineGraph
     //chartRenderer.setPanLimits( ???? );
 
     final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
-    lineChartView.setBackgroundColor( color.white );
     return lineChartView;
   }
 
