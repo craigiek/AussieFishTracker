@@ -11,7 +11,6 @@ import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
@@ -65,7 +64,7 @@ public class LineGraph
 
     final XYSeriesRenderer tidesRenderer = new XYSeriesRenderer();
     final XYSeriesRenderer currentTimeRenderer = new XYSeriesRenderer();
-    currentTimeRenderer.setColor( Color.GREEN );
+    currentTimeRenderer.setColor( Color.rgb( 0, 128, 0) );
     chartRenderer.addSeriesRenderer( tidesRenderer );
     chartRenderer.addSeriesRenderer( currentTimeRenderer );
 
