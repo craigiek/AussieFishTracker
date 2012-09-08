@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">AussieFishTracker</string>
+  <string name="chart_y_title">hPa</string>
+  <string name="chart_title_date_format">h:m a, d MMM yyyy</string>
   <string-array name="locations">
     <item>Warneet</item>
     <item>Tooradin</item>

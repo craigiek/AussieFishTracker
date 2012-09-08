@@ -2,10 +2,12 @@ package com.aft;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.view.View;
 import com.aft.R.color;
+import com.aft.R.string;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,9 +22,11 @@ import org.achartengine.renderer.XYSeriesRenderer;
 public class LineGraph
 {
   private final static int TIME_POINTS = 48;
+  private Context _context;
 
   public GraphicalView getView( final Context context )
   {
+    _context = context;
     final Date[] xTimes = getXCoordinates();
     final double[] yTidesCycle = getYCoordinates();
 
@@ -44,20 +48,36 @@ public class LineGraph
 
     // tide cycle series
     final XYSeriesRenderer tideCycleRenderer = new XYSeriesRenderer();
-    //tideCycleRenderer.setChartValuesTextSize( 50.0f ); NOT what we want - this refers to values displayed at each point
     chartRenderer.addSeriesRenderer( tideCycleRenderer );
+
+    // background colours
     chartRenderer.setApplyBackgroundColor( true );
+    // the following are to get transparency
     chartRenderer.setBackgroundColor( Color.argb( 0x00, 0x01, 0x01, 0x01 ) );
     chartRenderer.setMarginsColor( Color.argb( 0x00, 0x01, 0x01, 0x01 ) );
-    chartRenderer.setLegendTextSize( 20.0f );
-    chartRenderer.setAxesColor( Color.GRAY );
-    chartRenderer.setXLabelsColor( Color.GRAY );
-    chartRenderer.setYLabelsColor( 0, Color.GRAY );
+
+    // colours
+    chartRenderer.setAxesColor( Color.BLACK );
+    chartRenderer.setXLabelsColor( Color.BLACK );
+    chartRenderer.setYLabelsColor( 0, Color.BLACK );
     chartRenderer.setYLabelsAlign( Align.RIGHT );
+    chartRenderer.setLabelsColor( Color.BLACK );
+
+    // titles
+    chartRenderer.setLegendTextSize( 20.0f );
+    chartRenderer.setYTitle( _context.getResources().getString( R.string.chart_y_title ));
+    chartRenderer.setChartTitle( getChartTitle() );
     //chartRenderer.setPanLimits( ???? );
 
     final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
     return lineChartView;
+  }
+
+  private String getChartTitle()
+  {
+    final SimpleDateFormat formatter = new SimpleDateFormat( _context.getResources().getString(
+      string.chart_title_date_format ));
+    return formatter.format( new Date() );
   }
 
   private Date[] getXCoordinates()
