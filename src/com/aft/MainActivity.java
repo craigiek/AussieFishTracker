@@ -14,6 +14,8 @@ import org.achartengine.GraphicalView;
 public class MainActivity
   extends Activity
 {
+  private String _currentLocation = "Warneet";
+
   /**
    * Called when the activity is first created.
    */
@@ -22,7 +24,7 @@ public class MainActivity
   {
     super.onCreate( savedInstanceState );
     setContentView( R.layout.main );
-    refreshGraph("Warneet");
+    refreshGraph();
   }
 
   @Override
@@ -34,14 +36,14 @@ public class MainActivity
   }
 
   @Override
-  public boolean onPrepareOptionsMenu( Menu menu )
+  public boolean onPrepareOptionsMenu( final Menu menu )
   {
     final MenuItem locationsMenu = menu.getItem( 0 );
     final SubMenu subMenu = locationsMenu.getSubMenu();
     subMenu.clear();
     // todo get locations from a file which can be added to, removed from by the user
-    final String[] stringArray = getResources().getStringArray( array.locations );
-    for ( final String location : stringArray )
+    final String[] allLocations = getResources().getStringArray( array.locations );
+    for ( final String location : allLocations )
     {
       subMenu.add( location );
     }
@@ -49,16 +51,23 @@ public class MainActivity
   }
 
   @Override
-  public boolean onOptionsItemSelected( MenuItem item )
+  public boolean onOptionsItemSelected( final MenuItem item )
   {
-    // todo change the graph
+    if ( item.getItemId() == id.menu_refresh )
+    {
+      refreshGraph();
+    }
+    else
+    {
+      // todo set new location and refresh the graph
+      // refreshGraph();
+    }
     return true;
   }
 
-  private void refreshGraph( final String location )
+  private void refreshGraph()
   {
-    // todo get currently selected location and render it
-    final GraphicalView graph = new LineGraph(this, location).getView();
+    final GraphicalView graph = new LineGraph( this, _currentLocation ).getView();
     final LinearLayout layout = (LinearLayout) findViewById( id.chart );
     layout.removeAllViews();
     layout.addView( graph );
