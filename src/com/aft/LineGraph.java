@@ -11,6 +11,7 @@ import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
@@ -58,17 +59,37 @@ public class LineGraph
     //chartRenderer.setPanLimits( ???? );
 
     final XYMultipleSeriesDataset seriesList = new XYMultipleSeriesDataset();
-    seriesList.addSeries( getTidesSeries() );
+    final TimeSeries tidesSeries = getTidesSeries();
+    seriesList.addSeries( tidesSeries );
+    seriesList.addSeries( getCurrentTimeSeries( tidesSeries ) );
 
     final XYSeriesRenderer tidesRenderer = new XYSeriesRenderer();
+    final XYSeriesRenderer currentTimeRenderer = new XYSeriesRenderer();
+    currentTimeRenderer.setColor( Color.GREEN );
     chartRenderer.addSeriesRenderer( tidesRenderer );
+    chartRenderer.addSeriesRenderer( currentTimeRenderer );
 
-    //final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
     final String format = _context.getResources().getString( R.string.chart_time_format );
     final GraphicalView lineChartView = ChartFactory.getTimeChartView( _context, seriesList, chartRenderer, format );
     return lineChartView;
   }
 
+  // gets the vertical line showing 'now'
+  private TimeSeries getCurrentTimeSeries( final TimeSeries tidesSeries )
+  {
+    final TimeSeries currentTimeSeries = new TimeSeries( _context.getResources().getString( string.current_time_series_title ) );
+    // for some reason we need to change the x coordinate or we don't get a line - change it by 1 millisecond
+    final Date now = new Date();
+    final Calendar cal = Calendar.getInstance();
+    cal.setTime( new Date() );
+    cal.add( Calendar.MILLISECOND, 1 );
+    final Date then = cal.getTime();
+    currentTimeSeries.add( now, tidesSeries.getMinY() );
+    currentTimeSeries.add( then, tidesSeries.getMaxY() );
+    return currentTimeSeries;
+  }
+
+  // the wavy line showing the tides cycle
   private TimeSeries getTidesSeries()
   {
     final Date[] xTimes = getXCoordinates();
