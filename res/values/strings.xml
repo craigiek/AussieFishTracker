@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">AussieFishTracker</string>
+  <string-array name="locations">
+    <item>Warneet</item>
+    <item>Tooradin</item>
+    <item>Frankston</item>
+    <item>Mornington</item>
+  </string-array>
+</resources>

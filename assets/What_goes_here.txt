@@ -1,0 +1,2 @@
+The assets folder is for storing resources that are to be accessed in the classic 'file' manipulation style.
+For instance, you would have to use the AssetManager class to open the file, read in a stream of bytes and process the data.
