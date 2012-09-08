@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/menu_location"
+        android:icon="@drawable/location"
+        android:title="@string/menu_locations"
+        android:orderInCategory="1"
+        android:showAsAction="always">
+    <menu>
+      <!--locations to be added here at Runtime-->
+    </menu>
+  </item>
+  <item android:id="@+id/menu_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/refresh"
+        android:orderInCategory="2"
+        android:showAsAction="always"/>
+  <item android:id="@+id/menu_add_catch"
+        android:title="@string/menu_add_catch"
+        android:titleCondensed="@string/menu_add_catch_short"
+        android:icon="@drawable/content_new"
+        android:orderInCategory="3"
+        android:showAsAction="ifRoom"/>
+  <item android:id="@+id/menu_edit_locations"
+        android:title="@string/menu_edit_locations"
+        android:orderInCategory="4"
+        android:showAsAction="never"/>
+  <item android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:orderInCategory="5"
+        android:showAsAction="never"/>
+</menu>
+
+  <!-- note : can add a 'group' to group items with the same attributes -->
+
+  <!--android:title="string"-->
+  <!--android:titleCondensed="string"-->
+  <!--android:icon="@[package:]drawable/drawable_resource_name"-->
+  <!--android:onClick="method name"-->
+  <!--android:showAsAction=["ifRoom" | "never" | "withText" | "always" | "collapseActionView"]-->
+  <!--android:actionLayout="@[package:]layout/layout_resource_name"-->
+  <!--android:actionViewClass="class name"-->
+  <!--android:actionProviderClass="class name"-->
+  <!--android:alphabeticShortcut="string"-->
+  <!--android:numericShortcut="string"-->
+  <!--android:checkable=["true" | "false"]-->
+  <!--android:visible=["true" | "false"]-->
+  <!--android:enabled=["true" | "false"]-->
+  <!--android:menuCategory=["container" | "system" | "secondary" | "alternative"]-->
+  <!--android:orderInCategory="integer" />-->

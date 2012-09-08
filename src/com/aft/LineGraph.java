@@ -42,9 +42,13 @@ public class LineGraph
     chartRenderer.setLabelsColor( Color.BLACK );
 
     // titles
-    chartRenderer.setLegendTextSize( 20.0f );
-    chartRenderer.setYTitle( _context.getResources().getString( R.string.chart_y_title ) );
     chartRenderer.setChartTitle( getChartTitle() );
+    chartRenderer.setYTitle( _context.getResources().getString( R.string.chart_y_title ) );
+    chartRenderer.setLegendTextSize( 30.0f );
+    chartRenderer.setLabelsTextSize( 20.0f );
+    chartRenderer.setAxisTitleTextSize( 30.0f );
+    chartRenderer.setChartTitleTextSize( 30.0f );
+    //chartRenderer.setMargins( new int[]{0,0,10,0} );
     //chartRenderer.setPanLimits( ???? );
 
     final XYMultipleSeriesDataset seriesList = new XYMultipleSeriesDataset();
@@ -54,7 +58,8 @@ public class LineGraph
     chartRenderer.addSeriesRenderer( tidesRenderer );
 
     //final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
-    final GraphicalView lineChartView = ChartFactory.getTimeChartView( context, seriesList, chartRenderer, null );
+    final String format = _context.getResources().getString( R.string.chart_time_format );
+    final GraphicalView lineChartView = ChartFactory.getTimeChartView( context, seriesList, chartRenderer, format );
     return lineChartView;
   }
 
@@ -62,8 +67,6 @@ public class LineGraph
   {
     final Date[] xTimes = getXCoordinates();
     final double[] yTidesCycle = getWaveYValues();
-
-    //todo use a TimeChart ??? or use custom x labels!!
 
     final TimeSeries waveCycleSeries = new TimeSeries( _context.getResources().getString( string.chart_tides_series_title ) );
     for ( int i = 0; i < xTimes.length; i++ )

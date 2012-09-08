@@ -4,10 +4,17 @@
   <string name="chart_y_title">metres</string>
   <string name="chart_tides_series_title">Tide Cycle</string>
   <string name="chart_title_date_format">h:mm a, d MMM yyyy</string>
+  <string name="chart_time_format">h a</string>
   <string-array name="locations">
     <item>Warneet</item>
     <item>Tooradin</item>
     <item>Frankston</item>
     <item>Mornington</item>
   </string-array>
+  <string name="menu_locations">Locations</string>
+  <string name="menu_refresh">Refresh</string>
+  <string name="menu_add_catch">Add Catch</string>
+  <string name="menu_add_catch_short">Add</string>
+  <string name="menu_edit_locations">Edit Locations</string>
+  <string name="menu_settings">Settings</string>
 </resources>
