@@ -55,7 +55,7 @@ public class LineGraph
     chartRenderer.setAxisTitleTextSize( 30.0f );
     chartRenderer.setChartTitleTextSize( 30.0f );
     final int[] margins = chartRenderer.getMargins();
-    chartRenderer.setMargins( new int[]{margins[0],margins[1]+10,margins[2]+20,margins[3]} );
+    chartRenderer.setMargins( new int[]{margins[0]+40,margins[1]+30,margins[2]+40,margins[3]} );
     //chartRenderer.setPanLimits( ???? );
 
     final XYMultipleSeriesDataset seriesList = new XYMultipleSeriesDataset();
