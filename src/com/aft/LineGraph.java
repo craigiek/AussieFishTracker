@@ -1,17 +1,12 @@
 package com.aft;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
-import android.view.View;
-import com.aft.R.color;
 import com.aft.R.string;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.model.TimeSeries;
@@ -27,28 +22,11 @@ public class LineGraph
   public GraphicalView getView( final Context context )
   {
     _context = context;
-    final Date[] xTimes = getXCoordinates();
-    final double[] yTidesCycle = getYCoordinates();
-
-    //todo use a TimeChart ??? or use custom x labels!!
-
-    final TimeSeries waveCycleSeries = new TimeSeries( _context.getResources().getString( string.chart_tides_series_title ) );
-    for ( int i = 0; i < xTimes.length; i++ )
-    {
-      waveCycleSeries.add( xTimes[ i ], yTidesCycle[ i ] );
-    }
-
-    final XYMultipleSeriesDataset seriesList = new XYMultipleSeriesDataset();
-    seriesList.addSeries( waveCycleSeries );
 
     final XYMultipleSeriesRenderer chartRenderer = new XYMultipleSeriesRenderer();
     chartRenderer.setPanEnabled( false, false );
     chartRenderer.setAxisTitleTextSize( 20.0f );
     chartRenderer.setZoomButtonsVisible( true );
-
-    // tide cycle series
-    final XYSeriesRenderer tideCycleRenderer = new XYSeriesRenderer();
-    chartRenderer.addSeriesRenderer( tideCycleRenderer );
 
     // background colours
     chartRenderer.setApplyBackgroundColor( true );
@@ -69,8 +47,30 @@ public class LineGraph
     chartRenderer.setChartTitle( getChartTitle() );
     //chartRenderer.setPanLimits( ???? );
 
-    final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
+    final XYMultipleSeriesDataset seriesList = new XYMultipleSeriesDataset();
+    seriesList.addSeries( getTidesSeries() );
+
+    final XYSeriesRenderer tidesRenderer = new XYSeriesRenderer();
+    chartRenderer.addSeriesRenderer( tidesRenderer );
+
+    //final GraphicalView lineChartView = ChartFactory.getLineChartView( context, seriesList, chartRenderer );
+    final GraphicalView lineChartView = ChartFactory.getTimeChartView( context, seriesList, chartRenderer, null );
     return lineChartView;
+  }
+
+  private TimeSeries getTidesSeries()
+  {
+    final Date[] xTimes = getXCoordinates();
+    final double[] yTidesCycle = getWaveYValues();
+
+    //todo use a TimeChart ??? or use custom x labels!!
+
+    final TimeSeries waveCycleSeries = new TimeSeries( _context.getResources().getString( string.chart_tides_series_title ) );
+    for ( int i = 0; i < xTimes.length; i++ )
+    {
+      waveCycleSeries.add( xTimes[ i ], yTidesCycle[ i ] );
+    }
+    return waveCycleSeries;
   }
 
   private String getChartTitle()
@@ -93,13 +93,13 @@ public class LineGraph
 
     for ( int i = 0; i < TIME_POINTS; i++ )
     {
-      cal.add( Calendar.MINUTE, i * 30 );
+      cal.add( Calendar.MINUTE, 30 );
       data[ i ] = cal.getTime();
     }
     return data;
   }
 
-  private double[] getYCoordinates()
+  private double[] getWaveYValues()
   {
     final double[] data = new double[ TIME_POINTS ];
     double start = 0.0;
