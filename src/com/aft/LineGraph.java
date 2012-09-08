@@ -32,7 +32,7 @@ public class LineGraph
 
     //todo use a TimeChart ??? or use custom x labels!!
 
-    final TimeSeries waveCycleSeries = new TimeSeries( "Tides" );
+    final TimeSeries waveCycleSeries = new TimeSeries( _context.getResources().getString( string.chart_tides_series_title ) );
     for ( int i = 0; i < xTimes.length; i++ )
     {
       waveCycleSeries.add( xTimes[ i ], yTidesCycle[ i ] );
@@ -65,7 +65,7 @@ public class LineGraph
 
     // titles
     chartRenderer.setLegendTextSize( 20.0f );
-    chartRenderer.setYTitle( _context.getResources().getString( R.string.chart_y_title ));
+    chartRenderer.setYTitle( _context.getResources().getString( R.string.chart_y_title ) );
     chartRenderer.setChartTitle( getChartTitle() );
     //chartRenderer.setPanLimits( ???? );
 
