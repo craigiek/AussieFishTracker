@@ -1,0 +1,9 @@
+/out/
+/gen/
+
+/local.properties
+
+/*.iws
+/log
+/tmp
+/target
