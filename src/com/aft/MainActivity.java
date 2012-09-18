@@ -1,14 +1,21 @@
 package com.aft;
 
+import android.R.layout;
+import android.app.ActionBar;
+import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import com.aft.R.array;
 import com.aft.R.id;
+import com.aft.R.menu;
 import org.achartengine.GraphicalView;
 
 public class MainActivity
@@ -31,23 +38,32 @@ public class MainActivity
   public boolean onCreateOptionsMenu( Menu menu )
   {
     final MenuInflater inflater = getMenuInflater();
-    inflater.inflate( R.menu.main_menu, menu );
-    return true;
-  }
+    final ActionBar actionBar = getActionBar();
+    actionBar.setDisplayShowTitleEnabled( false );
+    //actionBar.setDisplayShowHomeEnabled( false );
+    actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_LIST );
+    //actionBar.setHomeButtonEnabled( true );
+    //actionBar.setDisplayUseLogoEnabled( true );
 
-  @Override
-  public boolean onPrepareOptionsMenu( final Menu menu )
-  {
-    final MenuItem locationsMenu = menu.getItem( 0 );
-    final SubMenu subMenu = locationsMenu.getSubMenu();
-    subMenu.clear();
-    // todo get locations from a file which can be added to, removed from by the user
-    final String[] allLocations = getResources().getStringArray( array.locations );
-    for ( final String location : allLocations )
+    inflater.inflate( R.menu.main_menu, menu );
+
+    // Add the spinner for the locations
+    final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( this,
+                                                                                     array.locations,
+                                                                                     layout.simple_spinner_item );
+    // Specify the layout to use when the list of choices appears
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    getActionBar().setListNavigationCallbacks( adapter, new OnNavigationListener()
     {
-      subMenu.add( location );
-    }
-    return super.onPrepareOptionsMenu( menu );
+      public boolean onNavigationItemSelected( final int itemPosition, final long itemId )
+      {
+        _currentLocation = adapter.getItem( itemPosition ).toString();
+        refreshGraph();
+        return false;
+      }
+    } );
+
+    return super.onCreateOptionsMenu( menu );
   }
 
   @Override
@@ -56,13 +72,17 @@ public class MainActivity
     if ( item.getItemId() == id.menu_refresh )
     {
       refreshGraph();
+      return true;
     }
-    else
+    else if ( item.getItemId() == id.menu_edit_locations )
     {
-      // todo set new location and refresh the graph
-      // refreshGraph();
+      // todo
     }
-    return true;
+    else if ( item.getItemId() == id.menu_settings )
+    {
+      // todo
+    }
+    return super.onOptionsItemSelected( item );
   }
 
   private void refreshGraph()

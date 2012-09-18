@@ -106,7 +106,7 @@ public class LineGraph
   {
     final SimpleDateFormat formatter = new SimpleDateFormat( _context.getResources().getString(
       string.chart_title_date_format ));
-    return formatter.format( new Date() );
+    return _location + " - " + formatter.format( new Date() );
   }
 
   private Date[] getXCoordinates()
