@@ -39,7 +39,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.1 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="achartengine-1.0.0" level="application" />
+    <orderEntry type="library" name="achartengine-1.0.0" level="project" />
   </component>
 </module>
 
