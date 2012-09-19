@@ -31,7 +31,6 @@ public class LineGraph
     final XYMultipleSeriesRenderer chartRenderer = new XYMultipleSeriesRenderer();
     chartRenderer.setPanEnabled( false, false );
     chartRenderer.setAxisTitleTextSize( 20.0f );
-    chartRenderer.setZoomButtonsVisible( true );
 
     // background colours
     chartRenderer.setApplyBackgroundColor( true );
