@@ -4,7 +4,7 @@
   <string name="chart_y_title">metres</string>
   <string name="chart_tides_series_title">Tide Cycle</string>
   <string name="current_time_series_title">Now</string>
-  <string name="chart_title_date_format">h:mm a, d MMM yyyy</string>
+  <string name="chart_title_date_format">h:mm:ss a, d MMM yyyy</string>
   <string name="chart_time_format">h a</string>
   <string-array name="locations">
     <item>Warneet</item>
