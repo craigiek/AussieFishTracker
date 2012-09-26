@@ -16,5 +16,14 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <!--  Calendar Activity -->
+    <activity android:name="CalendarActivity" />
+
+    <!--  Almanac Activity -->
+    <activity android:name="AlmanacActivity" />
+
+    <!--  Weather Activity -->
+    <activity android:name="WeatherActivity" />
   </application>
 </manifest>

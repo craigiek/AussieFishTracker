@@ -4,24 +4,40 @@ import android.R.layout;
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
+import android.app.LocalActivityManager;
+import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SlidingDrawer;
+import android.widget.SlidingDrawer.OnDrawerCloseListener;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.Spinner;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
+import android.widget.Toast;
 import com.aft.R.array;
+import com.aft.R.drawable;
 import com.aft.R.id;
 import com.aft.R.menu;
 import org.achartengine.GraphicalView;
 
 public class MainActivity
-  extends Activity
+  extends TabActivity
+  implements OnDrawerCloseListener, OnDrawerOpenListener, OnClickListener
 {
+  public static final String CURRENT_LOCATION = "CURRENT_LOCATION";
+
   private String _currentLocation = "Warneet";
+  private Intent _almanacIntent;
 
   /**
    * Called when the activity is first created.
@@ -31,7 +47,46 @@ public class MainActivity
   {
     super.onCreate( savedInstanceState );
     setContentView( R.layout.main );
-    refreshGraph();
+
+    TabHost tabHost = getTabHost();
+
+    // Tab for Calendar
+    final TabSpec calendarspec = tabHost.newTabSpec( "Calendar" );
+    calendarspec.setIndicator( null, getResources().getDrawable( drawable.calendar ) );
+    final Intent calendarIntent = new Intent( this, CalendarActivity.class );
+    calendarIntent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    calendarspec.setContent( calendarIntent );
+
+    // Tab for Almanac
+    final TabSpec almanacspec = tabHost.newTabSpec( "Almanac" );
+    almanacspec.setIndicator( null, getResources().getDrawable( drawable.almanac ) );
+    _almanacIntent = new Intent( this, AlmanacActivity.class );
+    _almanacIntent.putExtra( "current_location", _currentLocation );
+    _almanacIntent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    almanacspec.setContent( _almanacIntent );
+
+    // Tab for Weather
+    final TabSpec weatherspec = tabHost.newTabSpec( "Weather" );
+    weatherspec.setIndicator( null, getResources().getDrawable( drawable.weather ) );
+    final Intent weatherIntent = new Intent( this, WeatherActivity.class );
+    weatherIntent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    weatherspec.setContent( weatherIntent );
+
+    // Adding all TabSpec to TabHost
+    tabHost.addTab( calendarspec ); // Adding calendar tab
+    tabHost.addTab( almanacspec ); // Adding almanac tab
+    tabHost.addTab( weatherspec ); // Adding weather tab
+
+    final SlidingDrawer slidingDrawer = (SlidingDrawer) findViewById( id.sliding_drawer );
+    final Button newCatchButton = (Button) findViewById( id.new_catch_button );
+    final Button viewCatchesButton = (Button) findViewById( id.view_catches_button );
+
+    newCatchButton.setOnClickListener( this );
+    viewCatchesButton.setOnClickListener( this );
+
+    slidingDrawer.setOnDrawerOpenListener( this );
+    slidingDrawer.setOnDrawerCloseListener( this );
+
   }
 
   @Override
@@ -49,17 +104,18 @@ public class MainActivity
 
     // Add the spinner for the locations
     final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( this,
-                                                                                     array.locations,
-                                                                                     layout.simple_spinner_item );
+                                                                                array.locations,
+                                                                                layout.simple_spinner_item );
     // Specify the layout to use when the list of choices appears
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
     getActionBar().setListNavigationCallbacks( adapter, new OnNavigationListener()
     {
       public boolean onNavigationItemSelected( final int itemPosition, final long itemId )
       {
         _currentLocation = adapter.getItem( itemPosition ).toString();
+        _almanacIntent.putExtra( CURRENT_LOCATION, _currentLocation );
         refreshGraph();
-        return false;
+        return true;
       }
     } );
 
@@ -87,9 +143,34 @@ public class MainActivity
 
   private void refreshGraph()
   {
-    final GraphicalView graph = new LineGraph( this, _currentLocation ).getView();
-    final LinearLayout layout = (LinearLayout) findViewById( id.chart );
-    layout.removeAllViews();
-    layout.addView( graph );
+    // todo kjd - refresh the graph on the AlmanacLayout
+    //final GraphicalView graph = new LineGraph( this, _currentLocation ).getView();
+    //final LinearLayout layout = (LinearLayout) findViewById( id.chart );
+    //layout.removeAllViews();
+    //layout.addView( graph );
+  }
+
+  public void onDrawerClosed()
+  {
+    final Button slider = (Button) findViewById( id.sliding_button );
+    slider.setBackgroundResource( R.drawable.up );
+  }
+
+  public void onDrawerOpened()
+  {
+    final Button slider = (Button) findViewById( id.sliding_button  );
+    slider.setBackgroundResource( R.drawable.down );
+  }
+
+  public void onClick( final View v )
+  {
+    if ( v.getId() == id.new_catch_button )
+    {
+      Toast.makeText( this, "New catch selected", Toast.LENGTH_SHORT ).show();
+    }
+    else if ( v.getId() == id.view_catches_button )
+    {
+      Toast.makeText( this, "View catch selected", Toast.LENGTH_SHORT ).show();
+    }
   }
 }
