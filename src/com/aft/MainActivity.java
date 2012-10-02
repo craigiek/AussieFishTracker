@@ -3,32 +3,31 @@ package com.aft;
 import android.R.layout;
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
-import android.app.Activity;
-import android.app.LocalActivityManager;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.SlidingDrawer;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
-import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 import com.aft.R.array;
 import com.aft.R.drawable;
 import com.aft.R.id;
-import com.aft.R.menu;
-import org.achartengine.GraphicalView;
+import com.aft.catches.Catch;
+import com.aft.catches.CatchListAdapter;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity
   extends TabActivity
@@ -39,15 +38,28 @@ public class MainActivity
   private String _currentLocation = "Warneet";
   private Intent _almanacIntent;
 
+  protected ArrayList<Catch> _catchList;
+  private CatchListAdapter _adapter;
+
+
   /**
    * Called when the activity is first created.
    */
   @Override
-  public void onCreate( Bundle savedInstanceState )
+  public void onCreate( final Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
     setContentView( R.layout.main );
 
+    setUpTabs();
+
+    setUpSlidingDrawer();
+
+    setUpCatchList();
+  }
+
+  private void setUpTabs()
+  {
     TabHost tabHost = getTabHost();
 
     // Tab for Calendar
@@ -76,17 +88,30 @@ public class MainActivity
     tabHost.addTab( calendarspec ); // Adding calendar tab
     tabHost.addTab( almanacspec ); // Adding almanac tab
     tabHost.addTab( weatherspec ); // Adding weather tab
+  }
 
+  private void setUpSlidingDrawer()
+  {
     final SlidingDrawer slidingDrawer = (SlidingDrawer) findViewById( id.sliding_drawer );
     final Button newCatchButton = (Button) findViewById( id.new_catch_button );
-    final Button viewCatchesButton = (Button) findViewById( id.view_catches_button );
 
     newCatchButton.setOnClickListener( this );
-    viewCatchesButton.setOnClickListener( this );
 
     slidingDrawer.setOnDrawerOpenListener( this );
     slidingDrawer.setOnDrawerCloseListener( this );
+  }
 
+  private void setUpCatchList()
+  {
+    _catchList = new ArrayList<Catch>();
+    _adapter = new CatchListAdapter( this, _catchList );
+    final ListView listView = getListView();
+    listView.setAdapter( _adapter );
+    listView.setChoiceMode( AbsListView.CHOICE_MODE_SINGLE );
+
+    addCatch( new Catch( "Snapper", new Date(), 3.5 ) );
+    addCatch( new Catch( "Whiting", new Date(), 1.2 ) );
+    addCatch( new Catch( "Flathead", new Date(), 0.75 ) );
   }
 
   @Override
@@ -141,15 +166,6 @@ public class MainActivity
     return super.onOptionsItemSelected( item );
   }
 
-  private void refreshGraph()
-  {
-    // todo kjd - refresh the graph on the AlmanacLayout
-    //final GraphicalView graph = new LineGraph( this, _currentLocation ).getView();
-    //final LinearLayout layout = (LinearLayout) findViewById( id.chart );
-    //layout.removeAllViews();
-    //layout.addView( graph );
-  }
-
   public void onDrawerClosed()
   {
     final Button slider = (Button) findViewById( id.sliding_button );
@@ -158,7 +174,7 @@ public class MainActivity
 
   public void onDrawerOpened()
   {
-    final Button slider = (Button) findViewById( id.sliding_button  );
+    final Button slider = (Button) findViewById( id.sliding_button );
     slider.setBackgroundResource( R.drawable.down );
   }
 
@@ -168,9 +184,26 @@ public class MainActivity
     {
       Toast.makeText( this, "New catch selected", Toast.LENGTH_SHORT ).show();
     }
-    else if ( v.getId() == id.view_catches_button )
-    {
-      Toast.makeText( this, "View catch selected", Toast.LENGTH_SHORT ).show();
-    }
   }
+
+  private void refreshGraph()
+  {
+    // todo kjd - refresh the graph on the AlmanacLayout
+    //final GraphicalView graph = new LineGraph( this, _currentLocation ).getView();
+    //final LinearLayout layout = (LinearLayout) findViewById( id.chart );
+    //layout.removeAllViews();
+    //layout.addView( graph );
+  }
+
+  protected void addCatch( final Catch newCatch )
+  {
+    _catchList.add( newCatch );
+    _adapter.notifyDataSetChanged();
+  }
+
+  private ListView getListView()
+  {
+    return (ListView)findViewById( id.catch_list );
+  }
+
 }
