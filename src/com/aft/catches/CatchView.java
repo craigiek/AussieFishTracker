@@ -2,31 +2,41 @@ package com.aft.catches;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.Checkable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.aft.R;
 import com.aft.R.drawable;
 import com.aft.R.id;
 import com.aft.R.layout;
+import java.text.SimpleDateFormat;
 
 // should extend the root layout view of your widget
 public class CatchView
   extends LinearLayout
   implements Checkable
 {
+  private final SimpleDateFormat _formatter;
 
-  private Button _expandButton;
+
   private TextView _speciesText;
   private TextView _weightText;
+  private TextView _dateText;
   private TextView _locationText;
+  private ImageView _imageView;
+
   private Catch _catch;
 
   private boolean _expanded;
+
+  // references to our images
+  private Integer[] _thumbIDs =
+    {
+      drawable.snapper,
+      drawable.skate,
+      drawable.trout,
+    };
 
   /**
    * Basic Constructor that takes only takes in an application Context.
@@ -37,13 +47,24 @@ public class CatchView
   public CatchView( final Context context, final Catch fish )
   {
     super( context );
-    final LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+    _formatter = new SimpleDateFormat( context.getResources().getString( R.string.date_caught_format ) );
 
+    final LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     inflater.inflate( layout.catch_view, this, true );
-    _expandButton = (Button) findViewById( id.expand_button );
+
     _speciesText = (TextView) findViewById( id.catch_species_text );
+    _speciesText.setShadowLayer(
+      5f,   //float radius
+      10f,  //float dx
+      10f,  //float dy
+      0xFFffffff //int color
+    );
+
     _weightText = (TextView) findViewById( id.catch_weight_text );
+    _dateText = (TextView) findViewById( id.catch_date_text );
     _locationText = (TextView) findViewById( id.catch_location_text );
+    _imageView = (ImageView) findViewById( id.catch_image );
+
     setCatch( fish );
 
     _expanded = false;
@@ -58,9 +79,32 @@ public class CatchView
   public void setCatch( final Catch fish )
   {
     _catch = fish;
+    final String weightText = Double.toString( fish.getWeight() ) + "kg";
+    final String dateString = _formatter.format( fish.getDateCaught() );
+
+    final StringBuilder description = new StringBuilder( weightText );
+    description.append( " " ).append( fish.getSpecies() ).append( ", caught " ).append( dateString );
+
     _speciesText.setText( fish.getSpecies() );
-    _weightText.setText( Double.toString( fish.getWeight() ) );
+    _dateText.setText( dateString );
+    _weightText.setText( weightText );
     _locationText.setText( fish.getLocation() );
+
+    _imageView.setScaleType( ImageView.ScaleType.CENTER_CROP );
+    _imageView.setPadding( 50, 0,0,0 );
+    _imageView.setContentDescription( description.toString() );
+    if ( fish.getSpecies().equalsIgnoreCase( "snapper" ) )
+    {
+      _imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.snapper ) );
+    }
+    else if ( fish.getSpecies().equalsIgnoreCase( "skate" ) )
+    {
+      _imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.skate ) );
+    }
+    else if ( fish.getSpecies().equalsIgnoreCase( "trout" ) )
+    {
+      _imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.trout ) );
+    }
   }
 
   /**
@@ -72,8 +116,7 @@ public class CatchView
   private void expandCatchView()
   {
     _expanded = true;
-    _locationText.setVisibility( VISIBLE );
-    _expandButton.setBackgroundResource( drawable.down );
+    //_locationText.setVisibility( VISIBLE );
     requestLayout();
   }
 
@@ -86,8 +129,7 @@ public class CatchView
   private void collapseCatchView()
   {
     _expanded = false;
-    _locationText.setVisibility( INVISIBLE );
-    _expandButton.setBackgroundResource( drawable.right );
+    //_locationText.setVisibility( INVISIBLE );
     requestLayout();
   }
 
@@ -119,4 +161,5 @@ public class CatchView
       expandCatchView();
     }
   }
+
 }

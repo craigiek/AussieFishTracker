@@ -25,4 +25,5 @@
     <item>Whiting</item>
     <item>Flathead</item>
   </string-array>
+  <string name="date_caught_format">d MMM yyyy</string>
 </resources>

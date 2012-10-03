@@ -42,7 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="@string/button_new_catch"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
       </Button>
       <ListView android:id="@+id/catch_list"
                 android:layout_width="match_parent"

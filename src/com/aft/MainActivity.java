@@ -108,10 +108,13 @@ public class MainActivity
     final ListView listView = getListView();
     listView.setAdapter( _adapter );
     listView.setChoiceMode( AbsListView.CHOICE_MODE_SINGLE );
+    listView.setDividerHeight( 10 );
 
-    addCatch( new Catch( "Snapper", new Date(), 3.5 ) );
-    addCatch( new Catch( "Whiting", new Date(), 1.2 ) );
-    addCatch( new Catch( "Flathead", new Date(), 0.75 ) );
+    final Catch snapper = new Catch( "Snapper", new Date(), 3.5 );
+    snapper.setLocation( "Joe's Island" );
+    addCatch( snapper );
+    addCatch( new Catch( "Skate", new Date(), 1.2 ) );
+    addCatch( new Catch( "Trout", new Date(), 0.75 ) );
   }
 
   @Override
