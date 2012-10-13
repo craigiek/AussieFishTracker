@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:background="@android:color/white"
+              android:padding="20dp">
+  <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+    <ImageView
+      android:id="@+id/picture"
+      android:layout_width="80dp"
+      android:layout_height="fill_parent"
+      android:background="@color/dark_grey"
+      android:clickable="true"/>
+    <TextView android:textSize="16dip"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/black"
+              android:text="@string/add_catch_image"
+              android:paddingLeft="20dp"
+              android:gravity="center_vertical"
+              android:textStyle="italic">
+    </TextView>
+  </LinearLayout>
+  <LinearLayout android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+    <TextView android:textSize="18dip"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/black"
+              android:text="@string/add_catch_species_label"
+              android:paddingRight="10dp"
+              android:textStyle="bold"/>
+    <AutoCompleteTextView
+      android:id="@+id/new_catch_species"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/add_catch_species_hint"
+      android:inputType="text"
+      android:textColor="@android:color/black"/>
+  </LinearLayout>
+  <LinearLayout android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+    <TextView android:textSize="18dip"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/black"
+              android:text="@string/add_catch_weight_label"
+              android:paddingRight="10dp"
+              android:textStyle="bold"/>
+    <EditText
+      android:id="@+id/new_catch_weight"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:inputType="phone"
+      android:textColor="@android:color/black"/>
+  </LinearLayout>
+  <LinearLayout android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+    <TextView android:textSize="18dip"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/black"
+              android:text="@string/add_catch_location_label"
+              android:paddingRight="10dp"
+              android:textStyle="bold"/>
+    <EditText
+      android:id="@+id/new_catch_location"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:inputType="text"
+      android:textColor="@android:color/black"/>
+  </LinearLayout>
+</LinearLayout>

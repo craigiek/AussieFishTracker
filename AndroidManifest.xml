@@ -25,5 +25,9 @@
 
     <!--  Weather Activity -->
     <activity android:name="WeatherActivity" />
+
+    <!-- Create a New Catch Activity -->
+    <activity android:name=".catches.NewCatchActivity"
+              android:configChanges="orientation|keyboardHidden"/>
   </application>
 </manifest>
