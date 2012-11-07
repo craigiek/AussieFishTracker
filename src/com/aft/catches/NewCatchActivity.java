@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,7 @@ import com.aft.R.array;
 import com.aft.R.id;
 import com.aft.R.layout;
 import com.aft.util.ImageHelper;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +119,8 @@ public class NewCatchActivity
         //if we have a new URI attempt to decode the image bitmap
         if ( pickedUri != null )
         {
-          ImageHelper.setImage( _addPhotoImage, pickedUri, imgPath, color.white );
+          Log.e("----uri = " + pickedUri.toString(), "----imagepath = " + imgPath.toString());
+          ImageHelper.setImage( _addPhotoImage, imgPath, color.white );
         }
       }
     }

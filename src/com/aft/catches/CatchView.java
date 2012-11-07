@@ -1,6 +1,11 @@
 package com.aft.catches;
 
 import android.content.Context;
+import android.R.color;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Checkable;
 import android.widget.ImageView;
@@ -10,6 +15,8 @@ import com.aft.R;
 import com.aft.R.drawable;
 import com.aft.R.id;
 import com.aft.R.layout;
+import com.aft.util.ImageHelper;
+import java.io.File;
 import java.text.SimpleDateFormat;
 
 // should extend the root layout view of your widget
@@ -91,20 +98,36 @@ public class CatchView
     _locationText.setText( fish.getLocation() );
 
     _imageView.setScaleType( ImageView.ScaleType.CENTER_CROP );
-    _imageView.setPadding( 50, 0,0,0 );
+    _imageView.setPadding( 50, 0, 0, 0 );
     _imageView.setContentDescription( description.toString() );
+
+    final StringBuilder path = new StringBuilder( Environment.getExternalStorageDirectory().toString() );
+    path.append( "/DCIM/" );
+
     if ( fish.getSpecies().equalsIgnoreCase( "snapper" ) )
     {
-      _imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.snapper ) );
+      path.append( "grand_teton_sunset.jpg" );
     }
     else if ( fish.getSpecies().equalsIgnoreCase( "skate" ) )
     {
-      _imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.skate ) );
+      path.append( "another_world.jpg" );
     }
     else if ( fish.getSpecies().equalsIgnoreCase( "trout" ) )
     {
-      _imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.trout ) );
+      path.append( "shasta_lavender.jpg" );
     }
+
+    // todo images not loading well, OutofMemory errors - investigate
+    final File file = new File( path.toString() );
+    if ( !file.exists() )
+    {
+      // todo load a different image
+      Log.e( "Missing file", "Cannot find file " + path );
+    }
+    //final Bitmap bmp = BitmapFactory.decodeFile( path.toString() );
+    //_imageView.setImageBitmap( bmp );
+    ImageHelper.setImage( _imageView, path.toString(), color.white );
+    //_imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.snapper ) );
   }
 
   /**

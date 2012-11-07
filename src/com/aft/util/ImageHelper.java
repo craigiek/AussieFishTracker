@@ -1,6 +1,5 @@
 package com.aft.util;
 
-import android.R.color;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -10,8 +9,12 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.net.Uri;
+import android.util.Log;
 import android.widget.ImageView;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ImageHelper
 {
@@ -38,48 +41,46 @@ public class ImageHelper
     return output;
   }
 
-  public static void setImage( final ImageView view, final Uri uri, final String imagePath, final int background )
+  public static void setImage( final ImageView view, final String imagePath, final int background )
   {
-    //set the width and height we want to use as maximum display
-    int targetWidth = view.getWidth();
-    int targetHeight = view.getHeight();;
-    //create bitmap options to calculate and use sample size
-    final BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+    final int IMAGE_MAX_SIZE = 80;
+    final File f = new File( imagePath );
+    final Bitmap bitmap = decodeFile( f, IMAGE_MAX_SIZE );
+    view.setImageBitmap( bitmap );
+    view.setBackgroundColor( background );
+  }
 
-    //first decode image dimensions only - not the image bitmap itself
-    bmpOptions.inJustDecodeBounds = true;
-    BitmapFactory.decodeFile( imagePath, bmpOptions );
-
-    //image width and height before sampling
-    int currHeight = bmpOptions.outHeight;
-    int currWidth = bmpOptions.outWidth;
-
-    //variable to store new sample size
-    int sampleSize = 1;
-
-    //calculate the sample size if the existing size is larger than target size
-    if ( currHeight > targetHeight || currWidth > targetWidth )
+  private static Bitmap decodeFile( final File f, final int max_size )
+  {
+    Bitmap bitmap = null;
+    FileInputStream fis = null;
+    try
     {
-      //use either width or height
-      if ( currWidth > currHeight )
+      fis = new FileInputStream( f );
+      final BitmapFactory.Options o = new BitmapFactory.Options();
+      o.inPurgeable = true;
+      o.inInputShareable = true;
+      final Bitmap original = BitmapFactory.decodeFileDescriptor( fis.getFD(), null, o );
+      bitmap = Bitmap.createScaledBitmap(original, max_size, max_size, false);
+    }
+    catch ( IOException e )
+    {
+      Log.e("IOException", "Looking for " + f.getAbsolutePath(), e );
+    }
+    finally
+    {
+      if ( fis != null )
       {
-        sampleSize = Math.round( (float) currHeight / (float) targetHeight );
-      }
-      else
-      {
-        sampleSize = Math.round( (float) currWidth / (float) targetWidth );
+        try
+        {
+          fis.close();
+        }
+        catch ( IOException e )
+        {
+          Log.e("Error closing FileInputStream", "Error closing FIS for " + f.getPath(), e );
+        }
       }
     }
-    //use the new sample size
-    bmpOptions.inSampleSize = sampleSize;
-
-    //now decode the bitmap using sample options
-    bmpOptions.inJustDecodeBounds = false;
-
-    //get the file as a bitmap
-    final Bitmap pic = BitmapFactory.decodeFile(imagePath, bmpOptions);
-
-    view.setImageBitmap( pic );
-    view.setBackgroundColor( background );
+    return bitmap;
   }
 }
