@@ -20,8 +20,7 @@ public class ImageHelper
 {
   public static Bitmap getRoundedCornerBitmap( final Bitmap bitmap, final int pixels )
   {
-    Bitmap output = Bitmap.createBitmap( bitmap.getWidth(), bitmap
-      .getHeight(), Config.ARGB_8888 );
+    Bitmap output = Bitmap.createBitmap( bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888 );
     Canvas canvas = new Canvas( output );
 
     final int color = 0xff424242;
@@ -45,6 +44,12 @@ public class ImageHelper
   {
     final int IMAGE_MAX_SIZE = 80;
     final File f = new File( imagePath );
+    if ( !f.exists() )
+    {
+      // todo load a different image
+      Log.e( "Missing file", "Cannot find file " + imagePath );
+      return;
+    }
     final Bitmap bitmap = decodeFile( f, IMAGE_MAX_SIZE );
     view.setImageBitmap( bitmap );
     view.setBackgroundColor( background );

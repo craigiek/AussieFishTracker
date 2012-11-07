@@ -117,17 +117,7 @@ public class CatchView
       path.append( "shasta_lavender.jpg" );
     }
 
-    // todo images not loading well, OutofMemory errors - investigate
-    final File file = new File( path.toString() );
-    if ( !file.exists() )
-    {
-      // todo load a different image
-      Log.e( "Missing file", "Cannot find file " + path );
-    }
-    //final Bitmap bmp = BitmapFactory.decodeFile( path.toString() );
-    //_imageView.setImageBitmap( bmp );
     ImageHelper.setImage( _imageView, path.toString(), color.white );
-    //_imageView.setImageDrawable( getContext().getResources().getDrawable( drawable.snapper ) );
   }
 
   /**
