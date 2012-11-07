@@ -13,7 +13,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ImageHelper
@@ -40,9 +39,12 @@ public class ImageHelper
     return output;
   }
 
-  public static void setImage( final ImageView view, final String imagePath, final int background )
+  public static void setImage( final ImageView view,
+                               final int maxWidth,
+                               final int maxHeight,
+                               final String imagePath,
+                               final int background )
   {
-    final int IMAGE_MAX_SIZE = 80;
     final File f = new File( imagePath );
     if ( !f.exists() )
     {
@@ -50,12 +52,12 @@ public class ImageHelper
       Log.e( "Missing file", "Cannot find file " + imagePath );
       return;
     }
-    final Bitmap bitmap = decodeFile( f, IMAGE_MAX_SIZE );
+    final Bitmap bitmap = createScaledImage( f, maxWidth, maxHeight);
     view.setImageBitmap( bitmap );
     view.setBackgroundColor( background );
   }
 
-  private static Bitmap decodeFile( final File f, final int max_size )
+  private static Bitmap createScaledImage( final File f, final int maxWidth, final int maxHeight )
   {
     Bitmap bitmap = null;
     FileInputStream fis = null;
@@ -66,7 +68,7 @@ public class ImageHelper
       o.inPurgeable = true;
       o.inInputShareable = true;
       final Bitmap original = BitmapFactory.decodeFileDescriptor( fis.getFD(), null, o );
-      bitmap = Bitmap.createScaledBitmap(original, max_size, max_size, false);
+      bitmap = Bitmap.createScaledBitmap(original, maxWidth, maxHeight, false);
     }
     catch ( IOException e )
     {

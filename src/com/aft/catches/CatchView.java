@@ -117,7 +117,7 @@ public class CatchView
       path.append( "shasta_lavender.jpg" );
     }
 
-    ImageHelper.setImage( _imageView, path.toString(), color.white );
+    ImageHelper.setImage( _imageView, 80, 80, path.toString(), color.white );
   }
 
   /**

@@ -120,7 +120,7 @@ public class NewCatchActivity
         if ( pickedUri != null )
         {
           Log.e("----uri = " + pickedUri.toString(), "----imagepath = " + imgPath.toString());
-          ImageHelper.setImage( _addPhotoImage, imgPath, color.white );
+          ImageHelper.setImage( _addPhotoImage, 90, 90, imgPath, color.white );
         }
       }
     }
