@@ -22,7 +22,6 @@ import com.aft.R.array;
 import com.aft.R.id;
 import com.aft.R.layout;
 import com.aft.util.ImageHelper;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,7 +119,7 @@ public class NewCatchActivity
         if ( pickedUri != null )
         {
           Log.e("----uri = " + pickedUri.toString(), "----imagepath = " + imgPath.toString());
-          ImageHelper.setImage( _addPhotoImage, 90, 90, imgPath, color.white );
+          ImageHelper.setImage( _addPhotoImage, _addPhotoImage.getWidth(), _addPhotoImage.getHeight(), imgPath, color.white );
         }
       }
     }
