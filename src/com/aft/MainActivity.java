@@ -20,12 +20,12 @@ import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
 import com.aft.R.array;
 import com.aft.R.drawable;
 import com.aft.R.id;
 import com.aft.catches.Catch;
 import com.aft.catches.CatchListAdapter;
+import com.aft.catches.NewCatchActivity;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -185,7 +185,8 @@ public class MainActivity
   {
     if ( v.getId() == id.new_catch_button )
     {
-      Toast.makeText( this, "New catch selected", Toast.LENGTH_SHORT ).show();
+      final Intent newCatchIntent = new Intent( this, NewCatchActivity.class );
+      startActivity( newCatchIntent );
     }
   }
 

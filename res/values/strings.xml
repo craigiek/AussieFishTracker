@@ -26,4 +26,9 @@
     <item>Flathead</item>
   </string-array>
   <string name="date_caught_format">d MMM yyyy</string>
+  <string name="add_catch_image">Click to add Image</string>
+  <string name="add_catch_species_label">Species</string>
+  <string name="add_catch_species_hint">Snapper</string>
+  <string name="add_catch_weight_label">Weight (kg)</string>
+  <string name="add_catch_location_label">Location</string>
 </resources>
