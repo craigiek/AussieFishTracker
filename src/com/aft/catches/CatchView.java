@@ -86,7 +86,7 @@ public class CatchView
   public void setCatch( final Catch fish )
   {
     _catch = fish;
-    final String weightText = Double.toString( fish.getWeight() ) + "kg";
+    final String weightText = String.format("%.1f", fish.getWeight() ) + "kg";
     final String dateString = _formatter.format( fish.getDateCaught() );
 
     final StringBuilder description = new StringBuilder( weightText );
@@ -101,10 +101,14 @@ public class CatchView
     _imageView.setPadding( 50, 0, 0, 0 );
     _imageView.setContentDescription( description.toString() );
 
-    final StringBuilder path = new StringBuilder( Environment.getExternalStorageDirectory().toString() );
+    StringBuilder path = new StringBuilder( Environment.getExternalStorageDirectory().toString() );
     path.append( "/DCIM/" );
 
-    if ( fish.getSpecies().equalsIgnoreCase( "snapper" ) )
+    if ( fish.getImagePath() != null )
+    {
+      path = new StringBuilder( fish.getImagePath() );
+    }
+    else if ( fish.getSpecies().equalsIgnoreCase( "snapper" ) )
     {
       path.append( "grand_teton_sunset.jpg" );
     }
@@ -117,7 +121,7 @@ public class CatchView
       path.append( "shasta_lavender.jpg" );
     }
 
-    ImageHelper.setImage( _imageView, 80, 80, path.toString(), color.white );
+    ImageHelper.setImage( _imageView, 100, 80, path.toString(), color.white );
   }
 
   /**

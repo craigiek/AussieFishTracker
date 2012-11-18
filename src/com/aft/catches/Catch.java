@@ -12,12 +12,16 @@ public class Catch
   private Date _dateCaught;
   private double _weight;
   private String _location;
+  private String _imagePath;
 
-  public Catch( final String species, final Date date_caught, final double weightKgs )
+  public Catch( final String species, final Date date_caught, final double weightKgs,
+                final String location, final String imagePath )
   {
     _species = species;
     _dateCaught = date_caught;
     _weight = weightKgs;
+    _location = location;
+    _imagePath = imagePath;
   }
 
   public Date getDateCaught()
@@ -40,24 +44,8 @@ public class Catch
     return _location;
   }
 
-  public void setDateCaught( final Date dateCaught )
+  public String getImagePath()
   {
-    _dateCaught = dateCaught;
+    return _imagePath;
   }
-
-  public void setSpecies( final String species )
-  {
-    _species = species;
-  }
-
-  public void setWeight( final double weight )
-  {
-    _weight = weight;
-  }
-
-  public void setLocation( final String location )
-  {
-    _location = location;
-  }
-
 }

@@ -11,11 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import com.aft.R.array;
@@ -23,6 +25,7 @@ import com.aft.R.id;
 import com.aft.R.layout;
 import com.aft.util.ImageHelper;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NewCatchActivity
@@ -31,24 +34,39 @@ public class NewCatchActivity
 {
   //variable for selection intent
   private final int PICKER = 1;
+  // return codes
+  private final int CANCEL = 0;
+  private final int OK = 1;
+
+  public static final String SPECIES = "species";
+  public static final String WEIGHT = "weight";
+  public static final String LOCATION = "location";
+  public static final String DATE = "date";
+  public static final String IMAGE = "image";
 
   private AutoCompleteTextView _species;
   private EditText _weight;
   private EditText _location;
+  private String _imagePath;
   private ImageView _addPhotoImage;
+  private Button _cancelButton;
+  private Button _doneButton;
 
 
   public void onCreate( final Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
-    setContentView( layout.add_new_catch );
-    //get the large image view
-    //_picView = (ImageView) findViewById(R.id.picture);
+    setContentView( layout.new_catch );
     _species = (AutoCompleteTextView) findViewById( id.new_catch_species );
     _weight = (EditText) findViewById( id.new_catch_weight );
     _location = (EditText) findViewById( id.new_catch_location );
     _addPhotoImage = (ImageView) findViewById( id.picture );
+    _cancelButton = (Button) findViewById( id.new_catch_cancel_button );
+    _doneButton = (Button) findViewById( id.new_catch_done_button );
+
     _addPhotoImage.setOnClickListener( this );
+    _cancelButton.setOnClickListener( this );
+    _doneButton.setOnClickListener( this );
 
     final String[] species = getResources().getStringArray( array.species_list );
     ArrayAdapter<String> adapter = new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, species );
@@ -85,6 +103,24 @@ public class NewCatchActivity
       startActivityForResult( chooserIntent, PICKER );
       //we will handle the returned data in onActivityResult
     }
+    else if ( v.getId() == id.new_catch_cancel_button )
+    {
+      final Intent in = new Intent();
+      setResult( RESULT_CANCELED, in );
+      finish();
+    }
+    else if ( v.getId() == id.new_catch_done_button )
+    {
+      float weight = Float.valueOf( _weight.getText().toString() );
+      final Intent in = new Intent();
+      in.putExtra( SPECIES, _species.getText().toString() );
+      in.putExtra( WEIGHT, weight );
+      in.putExtra( LOCATION, _location.getText().toString() );
+      in.putExtra( DATE, new Date().getTime() );
+      in.putExtra( IMAGE, _imagePath );
+      setResult( RESULT_OK, in );
+      finish();
+    }
   }
 
   protected void onActivityResult( final int requestCode, final int resultCode, final Intent data )
@@ -119,6 +155,7 @@ public class NewCatchActivity
         if ( pickedUri != null )
         {
           Log.e("----uri = " + pickedUri.toString(), "----imagepath = " + imgPath.toString());
+          _imagePath = imgPath;
           ImageHelper.setImage( _addPhotoImage, _addPhotoImage.getWidth(), _addPhotoImage.getHeight(), imgPath, color.white );
         }
       }

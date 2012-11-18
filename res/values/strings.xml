@@ -31,4 +31,6 @@
   <string name="add_catch_species_hint">Snapper</string>
   <string name="add_catch_weight_label">Weight (kg)</string>
   <string name="add_catch_location_label">Location</string>
+  <string name="add_catch_cancel_button">Cancel</string>
+  <string name="add_catch_done_button">Done</string>
 </resources>

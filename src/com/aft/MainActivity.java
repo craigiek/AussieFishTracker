@@ -20,6 +20,7 @@ import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.Toast;
 import com.aft.R.array;
 import com.aft.R.drawable;
 import com.aft.R.id;
@@ -110,11 +111,9 @@ public class MainActivity
     listView.setChoiceMode( AbsListView.CHOICE_MODE_SINGLE );
     listView.setDividerHeight( 10 );
 
-    final Catch snapper = new Catch( "Snapper", new Date(), 3.5 );
-    snapper.setLocation( "Joe's Island" );
-    addCatch( snapper );
-    addCatch( new Catch( "Skate", new Date(), 1.2 ) );
-    addCatch( new Catch( "Trout", new Date(), 0.75 ) );
+    addCatch( new Catch( "Snapper", new Date(), 3.5, "Joe's Island", null ) );
+    addCatch( new Catch( "Skate", new Date(), 1.2, null, null ) );
+    addCatch( new Catch( "Trout", new Date(), 0.75, null, null ) );
   }
 
   @Override
@@ -186,7 +185,7 @@ public class MainActivity
     if ( v.getId() == id.new_catch_button )
     {
       final Intent newCatchIntent = new Intent( this, NewCatchActivity.class );
-      startActivity( newCatchIntent );
+      startActivityForResult( newCatchIntent, 1 );
     }
   }
 
@@ -210,4 +209,20 @@ public class MainActivity
     return (ListView)findViewById( id.catch_list );
   }
 
+  @Override
+  protected void onActivityResult( final int requestCode, final int resultCode, final Intent data )
+  {
+    super.onActivityResult( requestCode, resultCode, data );
+    if ( resultCode == RESULT_OK )
+    {
+      final Bundle extras = data.getExtras();
+      final String species = extras.getString( NewCatchActivity.SPECIES );
+      final float weight = extras.getFloat( NewCatchActivity.WEIGHT );
+      final String location = extras.getString( NewCatchActivity.LOCATION );
+      final long dateMillis = extras.getLong( NewCatchActivity.DATE );
+      final String imagePath = extras.getString( NewCatchActivity.IMAGE );
+      final Catch newCatch = new Catch( species, new Date( dateMillis ), weight, location, imagePath );
+      addCatch( newCatch );
+    }
+  }
 }
